@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  postgres-primary:
+    image: 172.20.9.20:7071/postgres
+    container_name: pg-primary
+    restart: always
+    environment:
+      - POSTGRESQL_PASSWORD=p0s9r3sq1@2025!
+      - POSTGRES_USER=psgresql_user
+      - POSTGRES_DB=psgresql_db
+      - REPMGR_PASSWORD=p0s9r3sq1@2025!
+      - REPMGR_PRIMARY_ROLE_WAIT_START_TIMEOUT=60
+      - REPMGR_NODE_NAME=wso2-db1
+      - REPMGR_NODE_NETWORK_NAME=wso2-db1
+      - REPMGR_PARTNER_NODES=wso2-db1,wso2-db2
+      - REPMGR_PRIMARY_ROLE_KEEPUP_TIMEOUT=60
+      - REPMGR_PRIMARY_ROLE_WAIT_START_TIMEOUT=60
+      - REPMGR_PORT_NUMBER=5432
+      - REPMGR_PRIMARY_HOST=wso2-db1
+    volumes:
+      - /var/lib/postgresql/data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - pgnet
+
+networks:
+  pgnet:
+    driver: bridge
