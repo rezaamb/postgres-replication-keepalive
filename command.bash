@@ -1,0 +1,1 @@
+docker run --rm   --network host   -e PGPASSWORD='Repl@2025'   -v /var/lib/postgresql/data:/var/lib/postgresql/data   172.20.9.20:7071/postgres   pg_basebackup     -h 172.20.22.11     -p 5432     -U repmgr     -D /var/lib/postgresql/data     -R -P -X stream
